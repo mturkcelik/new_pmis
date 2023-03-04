@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.datetime_safe import date
 
-#deneme
+
+# deneme
 
 class Project(models.Model):
     class StatusChoices(models.TextChoices):
@@ -45,9 +46,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='updates')
-    type = models.CharField(max_length=4,null=False, blank=False, choices=PostTypes.choices)
-    files = models.FileField(blank=True)
-    image = models.ImageField(blank=True)
+    type = models.CharField(max_length=4, null=False, blank=False, choices=PostTypes.choices)
+    files = models.FileField(blank=True, upload_to='files/')
+    image = models.ImageField(blank=True, upload_to='images/')
 
     def __str__(self):
         return self.summary
