@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "projects",
-    "accounts",
+    "subscriptions",
+    "djstripe",
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STRIPE_SECRET_KEY = 'sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51MivDcBFBSPM7JAlw6YpxTNM0fjj8xwAnNXRwrqyW27QIiuD3Fv8Qf7L7vo897VdHlF4Z0wiPhhaSy9p0J6gHUNc00wqQ9U4Ls'
-
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "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")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY")
+STRIPE_LIVE_MODE = False  # Change to True in production
+DJSTRIPE_WEBHOOK_SECRET = "whsec_e7701e29d50f2d713d5b1b00f5197564e0c43b05d8a184ffc7acfe4fb3e8b1cf"  # Get it frdxom the section in the Stripe dashboard where you added the webhook endpoint
+DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
