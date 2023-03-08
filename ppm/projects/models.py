@@ -22,8 +22,8 @@ class Project(models.Model):
     status = models.CharField(max_length=3, choices=StatusChoices.choices, default=StatusChoices.PENDING)
     is_archived = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_projects')
-    assigned_to = models.ManyToManyField(User, related_name='assigned_projects', null=True, blank=True)
-    sponsor = models.ManyToManyField(User, related_name='sponsored_projects', null=True, blank=True)
+    assigned_to = models.ManyToManyField(User, related_name='assigned_projects', blank=True)
+    sponsor = models.ManyToManyField(User, related_name='sponsored_projects', blank=True)
 
     def __str__(self):
         return self.title
