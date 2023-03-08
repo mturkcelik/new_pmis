@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "projects",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -113,3 +114,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_SECRET_KEY = 'sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51MivDcBFBSPM7JAlw6YpxTNM0fjj8xwAnNXRwrqyW27QIiuD3Fv8Qf7L7vo897VdHlF4Z0wiPhhaSy9p0J6gHUNc00wqQ9U4Ls'
+
