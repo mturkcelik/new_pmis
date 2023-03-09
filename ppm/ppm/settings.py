@@ -55,7 +55,7 @@ ROOT_URLCONF = "ppm.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -73,11 +73,17 @@ WSGI_APPLICATION = "ppm.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+#Development DB
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'postgres',
+    'USER': 'postgres',
+    'PASSWORD': 'Zem123537',
+    'HOST': 'pmisdev2.cbmn4gunoj7c.eu-north-1.rds.amazonaws.com',
+    'PORT': '5432',
+  }
 }
 
 # Password validation
@@ -106,7 +112,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -116,9 +123,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "pk_live_51MivDcBFBSPM7JAlw5djSGKpZzLoVf3P4Nn0keTwhE3HJQVhBthkyCPvasxZZWn98QptNMCeUPuy146QvSRRufls00FKx3iIY8")
 STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "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")
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "pk_test_51MivDcBFBSPM7JAlw6YpxTNM0fjj8xwAnNXRwrqyW27QIiuD3Fv8Qf7L7vo897VdHlF4Z0wiPhhaSy9p0J6gHUNc00wqQ9U4Ls")
 STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY")
 STRIPE_LIVE_MODE = False  # Change to True in production
 DJSTRIPE_WEBHOOK_SECRET = "whsec_e7701e29d50f2d713d5b1b00f5197564e0c43b05d8a184ffc7acfe4fb3e8b1cf"  # Get it frdxom the section in the Stripe dashboard where you added the webhook endpoint
 DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+DJSTRIPE_PRORATION_POLICY = True
+DJSTRIPE_SUBSCRIBER_MODEL = 'subscriptions.CustomUser'
+# DJSTRIPE_SUBSCRIBER_MODEL_MIGRATION_DEPENDENCY = "0003_here_the_subscriber_model_was_added"
