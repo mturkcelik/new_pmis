@@ -43,17 +43,18 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration",
     "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
+    #"allauth.account",
+    #"allauth.socialaccount",
+    "crispy_forms",
+    "crispy_bootstrap4",
     # "allauth.socialaccount.providers.apple",
     # "allauth.socialaccount.providers.github",
     # "allauth.socialaccount.providers.google",
     # "allauth.socialaccount.providers.microsoft",
     # "allauth.socialaccount.providers.slack",
-    # "djstripe",
+    "djstripe",
     "projects",
     "subscriptions.apps.SubscriptionsConfig",
-    "crispy_forms",
 ]
 
 AUTH_USER_MODEL = "subscriptions.CustomUser"
@@ -155,6 +156,7 @@ STATIC_FILES_DIR = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -165,12 +167,12 @@ MEDIA_URL = '/media/'
 
 # STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "pk_live_51MivDcBFBSPM7JAlw5djSGKpZzLoVf3P4Nn0keTwhE3HJQVhBthkyCPvasxZZWn98QptNMCeUPuy146QvSRRufls00FKx3iIY8")
 # STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "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")
-# STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "pk_test_51MivDcBFBSPM7JAlw6YpxTNM0fjj8xwAnNXRwrqyW27QIiuD3Fv8Qf7L7vo897VdHlF4Z0wiPhhaSy9p0J6gHUNc00wqQ9U4Ls")
-# STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY")
+STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "pk_test_51MivDcBFBSPM7JAlw6YpxTNM0fjj8xwAnNXRwrqyW27QIiuD3Fv8Qf7L7vo897VdHlF4Z0wiPhhaSy9p0J6gHUNc00wqQ9U4Ls")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_51MivDcBFBSPM7JAl8dagD6ybTE8xenpMv5yFEp16KnqAwIyzURMLkfnGaZKGija4TeqrFHh6SVvyG20g7TEfhWKP00PdedNnYY")
 # STRIPE_LIVE_MODE = False  # Change to True in production
-# DJSTRIPE_WEBHOOK_SECRET = "whsec_e7701e29d50f2d713d5b1b00f5197564e0c43b05d8a184ffc7acfe4fb3e8b1cf"  # Get it frdxom the section in the Stripe dashboard where you added the webhook endpoint
+DJSTRIPE_WEBHOOK_SECRET = "whsec_e7701e29d50f2d713d5b1b00f5197564e0c43b05d8a184ffc7acfe4fb3e8b1cf"  # Get it frdxom the section in the Stripe dashboard where you added the webhook endpoint
 # DJSTRIPE_USE_NATIVE_JSONFIELD = True  # We recommend setting to True for new installations
-# DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 # DJSTRIPE_PRORATION_POLICY = True
 
 

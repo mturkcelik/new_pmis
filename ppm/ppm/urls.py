@@ -22,6 +22,7 @@ urlpatterns = [
     path("projects/", include('projects.urls')),
     path("subscriptions/", include('subscriptions.urls')),
     path("admin/", admin.site.urls),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]
 
 if settings.DEBUG:

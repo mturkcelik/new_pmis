@@ -3,6 +3,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import NewUserForm
+from django.conf import settings
+import stripe
 
 
 def home(request):
@@ -45,3 +47,6 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("subscriptions:home")
+
+
+stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
