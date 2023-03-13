@@ -1,9 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.datetime_safe import date
+from django.conf import settings
 
-
-# deneme
 
 class Project(models.Model):
     class StatusChoices(models.TextChoices):
@@ -21,9 +19,9 @@ class Project(models.Model):
     start_date = models.DateField(default=date.today, editable=True)
     status = models.CharField(max_length=3, choices=StatusChoices.choices, default=StatusChoices.PENDING)
     is_archived = models.BooleanField(default=False)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_projects')
-    assigned_to = models.ManyToManyField(User, related_name='assigned_projects', blank=True)
-    sponsor = models.ManyToManyField(User, related_name='sponsored_projects', blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='created_projects')
+    assigned_to = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='assigned_projects', blank=True)
+    sponsor = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='sponsored_projects', blank=True)
 
     def __str__(self):
         return self.title
@@ -42,7 +40,7 @@ class Post(models.Model):
 
     summary = models.CharField(max_length=280)
     detail = models.TextField(blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='updates')
@@ -56,12 +54,12 @@ class Post(models.Model):
 
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=280)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
